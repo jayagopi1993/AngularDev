@@ -44,10 +44,19 @@
       </div>
 
 
+<br>
 
       <br>
       <div *ngIf="outputData">
-        <h4>Output Data</h4>
+          <h4 class="text-center">Output Data</h4>
+        <div class="row">
+        <div class="col-md-offset-8 col-md-4">
+            <div class="form-group">
+                <label for="search">Filter String</label>
+                <input type="text" [(ngModel)]="queryString" class="form-control" id="search" placeholder="Search for issue count">
+              </div>
+          </div>
+        </div>
         <table class="table table-bordered">
           <tr>
             <th>First name</th>
@@ -55,12 +64,14 @@
             <th>Issue count</th>
             <th>Date of birth</th>
           </tr>
-          <tr *ngFor="let data of outputData">
+
+          <tr *ngFor="let data of outputData | filterPipe: queryString">
             <td>{{data.fname}}</td>
             <td>{{data.lname}}</td>
             <td>{{data.issueCount}}</td>
             <td>{{data.dateOfBirth}}</td>
           </tr>
+
         </table>
       </div>
     </div>

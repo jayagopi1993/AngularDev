@@ -9,9 +9,12 @@ import { routing} from './app.routing';
 
 import { MyService } from './services/service';
 
+import { FilterPipe } from './app.filterPipe.pipe';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

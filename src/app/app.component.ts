@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import 'reflect-metadata';
 import { MyService } from './services/service';
 import { Router } from '@angular/router';
+import { FilterPipe } from './app.filterPipe.pipe';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [MyService]
+    providers: [MyService,FilterPipe]
 })
 export class AppComponent implements OnInit {
     title = 'RapoBank File Customer statment processing';
@@ -16,8 +17,8 @@ export class AppComponent implements OnInit {
     errorMsg= null;
     error = null;
     outputData = null;
-
-    constructor(private _router: Router,private _service: MyService) {
+  
+    constructor(private _router: Router,private _service: MyService,filterPipe: FilterPipe) {
 
     }
 
@@ -33,12 +34,11 @@ export class AppComponent implements OnInit {
     postfile() {
         if (this.file !== undefined) {
             this._service.postFormData(this.file).map(responce => {
-                this.outputData = responce;
-                this.successMsg = "Successfully uploaded !!";
+              this.outputData = responce;
             }).catch( error => 
                 this.errorMsg = "Failed to Upload File"
             );
-            
+            this.successMsg = "Successfully uploaded !!";
         } else {
             this.errorMsg = "Failed to Upload File";
         }
